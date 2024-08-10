@@ -1,9 +1,10 @@
-import { StyleSheet, SafeAreaView, Platform, ScrollView } from 'react-native';
+import { StyleSheet, SafeAreaView, Platform, ScrollView, FlatList } from 'react-native';
 import PokemonCard from './components/PokemonCard';
 
 export default function App() {
   const pokemonData = [
     {
+      id: 1,
       name: "Charmander",
       image: require("./assets/charmander.png"),
       type: "Fire",
@@ -13,6 +14,7 @@ export default function App() {
       decorators: { borderColor: "#FF5733", emoji: "🔥" }
     },
     {
+      id: 2,
       name: "Squirtle",
       image: require("./assets/squirtle.png"),
       type: "Water",
@@ -22,6 +24,7 @@ export default function App() {
       decorators: { borderColor: "#6493EA", emoji: "💧" }
     },
     {
+      id: 3,
       name: "Bulbasaur",
       image: require("./assets/bulbasaur.png"),
       type: "Grass",
@@ -31,6 +34,7 @@ export default function App() {
       decorators: { borderColor: "#66CC66", emoji: "🌿" }
     },
     {
+      id: 4,
       name: "Pikachu",
       image: require("./assets/pikachu.png"),
       type: "Electric",
@@ -44,9 +48,14 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        {pokemonData.map((pokemon, i) => (
-          <PokemonCard key={i} pokemon={pokemon} />
-        ))}
+        <FlatList
+          data={pokemonData}
+          renderItem={({ item }) => {
+            return (
+              <PokemonCard key={item.id} pokemon={item} />
+            )
+          }}
+        />
       </ScrollView>
     </SafeAreaView>
   );
